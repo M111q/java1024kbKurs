@@ -36,14 +36,28 @@ public class ProductServiceImpl implements ProductService {
     }
 
     public Boolean isMoreThanZeroProduct(String productName) {
-        return null;
+        Product product = getProduct(productName);
+        if (product.getProductCount() > 0){
+            return true;
+        }
+        return false;
     }
 
     public Boolean isProductExiste(String productName) {
-        return null;
+        for (Product product: products) {
+            if (product.getProductName() == productName){
+                return true;
+            }
+        }
+        return false;
     }
 
     public Boolean isProductExiste(Long id) {
-        return null;
+        for (Product product: products) {
+            if (product.getId() == id){
+                return true;
+            }
+        }
+        return false;
     }
 }

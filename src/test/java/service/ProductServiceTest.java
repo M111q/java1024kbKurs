@@ -72,8 +72,20 @@ public class ProductServiceTest {
 
     @Test
     public void isMoreThanZeroProductTest(){
+        List<Product> products = new ArrayList<Product>();
 
+        Product produktTest1 = new Product(1L,"produkt1",100,10,"black",100);
+        products.add(produktTest1);
+        Product produktTest2 =  new Product(2L,"produkt2",10,1,"red",50);
+        products.add(produktTest2);
+        Product produktTest3 = new Product(3L,"produkt3",1,11,"white",1);
+        products.add(produktTest3);
 
+        ProductServiceImpl productService = new ProductServiceImpl(products);
+        Boolean result = productService.isMoreThanZeroProduct("produkt1");
+
+        Assert.assertEquals(true,result);
+        Assert.assertNotEquals(false,result);
     }
 
 
