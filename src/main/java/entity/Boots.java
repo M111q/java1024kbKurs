@@ -21,9 +21,6 @@ public class Boots extends Product {
 
     @Override
     public String toString() {
-        return "entity.Boots{" +
-                "size=" + size +
-                ", isNaturalSkin=" + isNaturalSkin +
-                "} " + super.toString();
+        return super.toString() + PRODUCT_SEPARATOR + size + PRODUCT_SEPARATOR + isNaturalSkin;
     }
 }

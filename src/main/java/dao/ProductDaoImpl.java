@@ -4,12 +4,13 @@ import api.ProductDao;
 import entity.Product;
 
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.PrintWriter;
 import java.util.List;
 
 public class ProductDaoImpl implements ProductDao {
 
-    String fileName;
+
 
     /*
     W konstruktorze parametrowym inicjalizuj nazwę pliku i zapisz ją w polu klasy
@@ -30,22 +31,20 @@ bezpieczne.
         printWriter.write("Obługuję te trudne pliki!. ");
         printWriter.close();
      */
-    PrintWriter printWriter;
-
-    {
-        try {
-            printWriter = new PrintWriter(fileName);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
+    //PrintWriter printWriter;
+    String fileName;
 
     public ProductDaoImpl(String fileName) {
         this.fileName = fileName + ".txt";
     }
 
-    public void saveProduct(Product product) {
-        printWriter.write(product);
+    public void saveProduct(Product product) throws FileNotFoundException {
+        FileOutputStream fileOutputStream = new FileOutputStream(fileName, true);
+        PrintWriter printWriter = new PrintWriter(fileOutputStream);
+
+        printWriter.write(product.toString());
+
+        printWriter.close();
     }
 
     public void saveProducts(List<Product> products) {
@@ -72,11 +71,4 @@ bezpieczne.
         return null;
     }
 
-    @Override
-    public String toString() {
-        return "ProductDaoImpl{" +
-                "fileName='" + fileName + '\'' +
-                ", printWriter=" + printWriter +
-                '}';
-    }
 }

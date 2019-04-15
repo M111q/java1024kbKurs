@@ -1,13 +1,15 @@
+import dao.ProductDaoImpl;
 import entity.Boots;
 import entity.User;
 import service.UserServiceImpl;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         // write your code here
         Boots trampki = new Boots(1L,"converse",100,1,"black",50,42,false);
         //System.out.println(trampki);
@@ -35,5 +37,9 @@ public class Main {
         ) {
             System.out.println(user.getLogin());
         }
+
+        ProductDaoImpl dao = new ProductDaoImpl("test");
+
+        dao.saveProduct(trampki);
     }
 }

@@ -21,9 +21,6 @@ public class Cloth extends Product {
 
     @Override
     public String toString() {
-        return "entity.Cloth{" +
-                "size='" + size + '\'' +
-                ", material='" + material + '\'' +
-                '}' + super.toString();
+        return super.toString() + PRODUCT_SEPARATOR + size +PRODUCT_SEPARATOR + material;
     }
 }

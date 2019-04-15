@@ -2,11 +2,12 @@ package api;
 
 import entity.Product;
 
+import java.io.FileNotFoundException;
 import java.util.List;
 
 public interface ProductDao {
 
-    void saveProduct(Product product);
+    void saveProduct(Product product) throws FileNotFoundException;
 
     void saveProducts(List<Product> products);
 
