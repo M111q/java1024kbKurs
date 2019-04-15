@@ -1,9 +1,9 @@
+entity\User.class
+service\ProductServiceImpl.class
 Main.class
-service/ProductServiceImpl.class
-service/UserServiceImpl.class
-api/ProductService.class
-entity/Product.class
-entity/User.class
-api/UserService.class
-entity/Cloth.class
-entity/Boots.class
+entity\Product.class
+api\ProductService.class
+entity\Cloth.class
+api\UserService.class
+entity\Boots.class
+service\UserServiceImpl.class
