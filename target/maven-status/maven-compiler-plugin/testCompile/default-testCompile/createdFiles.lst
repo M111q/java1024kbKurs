@@ -1,2 +1,2 @@
-service\ProductServiceTest.class
-service\UserServiceTest.class
+dao/ProductDaoImplTest.class
+entity/parser/ProductParserTest.class

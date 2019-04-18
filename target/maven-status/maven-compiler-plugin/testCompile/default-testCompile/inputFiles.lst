@@ -1,2 +1,4 @@
-C:\Users\MG\IdeaProjects\management\src\test\java\service\UserServiceTest.java
-C:\Users\MG\IdeaProjects\management\src\test\java\service\ProductServiceTest.java
+/home/mik/IdeaProjects/management/src/test/java/entity/parser/ProductParserTest.java
+/home/mik/IdeaProjects/management/src/test/java/dao/ProductDaoImplTest.java
+/home/mik/IdeaProjects/management/src/test/java/service/UserServiceTest.java
+/home/mik/IdeaProjects/management/src/test/java/service/ProductServiceTest.java

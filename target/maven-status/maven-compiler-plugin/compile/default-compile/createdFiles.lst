@@ -1,9 +1,2 @@
-entity\User.class
-service\ProductServiceImpl.class
 Main.class
-entity\Product.class
-api\ProductService.class
-entity\Cloth.class
-api\UserService.class
-entity\Boots.class
-service\UserServiceImpl.class
+entity/parser/ProductParser.class

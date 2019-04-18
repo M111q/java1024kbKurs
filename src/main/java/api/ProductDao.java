@@ -3,23 +3,24 @@ package api;
 import entity.Product;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 
 public interface ProductDao {
 
     void saveProduct(Product product) throws FileNotFoundException;
 
-    void saveProducts(List<Product> products);
+    void saveProducts(List<Product> products) throws IOException;
 
-    void removeProductById(Long productId);
+    void removeProductById(Long productId) throws IOException;
 
-    void removeProductByName(String productName);
+    void removeProductByName(String productName) throws IOException;
 
-    List<Product> getAllProducts();
+    List<Product> getAllProducts() throws IOException;
 
-    Product getProductById(Long productId);
+    Product getProductById(Long productId) throws IOException;
 
-    Product getProductByProductName(String productName);
+    Product getProductByProductName(String productName) throws IOException;
 
 
 
