@@ -1,63 +1,58 @@
 package service;
 
 import api.ProductService;
+import dao.ProductDaoImpl;
 import entity.Product;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ProductServiceImpl implements ProductService {
 
-    List<Product> products;
+    //List<Product> products;
 
-    public ProductServiceImpl() {
-        this.products = new ArrayList<Product>();
-    }
+    private static  ProductServiceImpl instance = null;
+    private ProductDaoImpl productDao = null;
 
-    public ProductServiceImpl(List<Product> products) {
-        this.products = products;
-    }
-
-    public List<Product> getAllProducts() {
-        return products;
-    }
-
-    public int getProductsCount() {
-        return products.size();
-    }
-
-    public Product getProduct(String productName) {
-        for (Product product: products) {
-            if (product.getProductName().equals(productName)){
-                return product;
-            }
+    private ProductServiceImpl() {
+        try {
+            productDao = new ProductDaoImpl("products.data", "PRODUCT");
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        return null;
     }
 
-    public Boolean isMoreThanZeroProduct(String productName) {
-        Product product = getProduct(productName);
-        if (isProductExiste(productName) && product.getProductCount() > 0){
-            return true;
+    public static ProductServiceImpl getInstance(){
+        if (instance == null){
+            instance = new ProductServiceImpl();
         }
-        return false;
+        return instance;
     }
 
-    public Boolean isProductExiste(String productName) {
-        for (Product product: products) {
-            if (product.getProductName().equals(productName)){
-                return true;
-            }
-        }
-        return false;
+    public List<Product> getAllProducts() throws IOException {
+        return productDao.getAllProducts();
     }
 
-    public Boolean isProductExiste(Long id) {
-        for (Product product: products) {
-            if (product.getId().equals(id)){
-                return true;
-            }
-        }
-        return false;
+    public int getProductsCount() throws IOException {
+
+        return productDao.getAllProducts().size();
+    }
+
+    public Product getProductByName(String productName) throws IOException {
+
+        return productDao.getProductByProductName(productName);
+    }
+
+    public Boolean isMoreThanZeroProduct(String productName) throws IOException {
+        return isProductExist(productName) && productDao.getAllProducts().size() > 0;
+    }
+
+    public Boolean isProductExist(String productName) throws IOException {
+        return !productDao.getProductByProductName(productName).equals(null);
+    }
+
+    public Boolean isProductExist(Long id) throws IOException {
+        return !productDao.getProductById(id).equals(null);
     }
 }

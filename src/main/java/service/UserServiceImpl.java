@@ -1,43 +1,51 @@
 package service;
 
+import api.UserDao;
 import api.UserService;
+import dao.UserDaoImpl;
 import entity.User;
+import exception.UserLoginAlreadyExistException;
+import exception.UserShortLengthLoginException;
+import exception.UserShortLengthPasswordException;
+import validator.UserValidator;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class UserServiceImpl implements UserService {
 
-    List<User> users;
 
-    public UserServiceImpl() {
-        this.users = new ArrayList<User>();
-    }
+    private UserDaoImpl userDao = null;
+    private UserValidator userValidator = null;
+    private static UserServiceImpl instance = null;
 
-    public UserServiceImpl(List<User> users) {
-        this.users = users;
-    }
-
-    public List<User> getAllUsers() {
-        return users;
-    }
-
-    public void addUser(User user) {
-        users.add(user);
-    }
-
-   // public void removeUserById(Long userId) {
-    //    users.remove(userId);
-    //}
-
-    public void removeUserById(Long userId) {
-        for(int i=0;i<users.size();i++){
-            User userFromList = users.get(i);
-
-            if (userFromList.getId() == userId) {
-                users.remove(i);
-                break;
-            }
+    public static UserServiceImpl getInstance() {
+        if (instance == null){
+            instance = new UserServiceImpl();
         }
+        return instance;
+    }
+
+    private UserServiceImpl() {
+        userDao = UserDaoImpl.getInstance();
+        userValidator = UserValidator.getInstance();
+    }
+
+    public List<User> getAllUsers() throws IOException {
+        return userDao.getAllUsers();
+    }
+
+    public void addUser(User user) throws FileNotFoundException, UserLoginAlreadyExistException, UserShortLengthPasswordException, UserShortLengthLoginException {
+        if (userValidator.isValidate(user)){
+            userDao.saveUser(user);
+        }
+    }
+
+    public void removeUserById(Long userId) throws IOException {
+
+        userDao.removeUserById(userId);
+
     }
 }
