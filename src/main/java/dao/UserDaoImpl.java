@@ -10,13 +10,33 @@ import java.util.List;
 
 public class UserDaoImpl implements UserDao {
 
-    final private String fileName;
+    final static private String fileName = "users.data";
+    private static UserDaoImpl instance = null;
 
+/*
     public UserDaoImpl(String fileName) throws IOException {
         this.fileName = fileName;
         File file = new File(fileName);
         file.createNewFile();
     }
+*/
+    private UserDaoImpl(){
+        File file = new File(fileName);
+        try {
+            file.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.exit(-1);
+        }
+    }
+
+    public static UserDaoImpl getInstance() {
+        if (instance == null) {
+            instance = new UserDaoImpl();
+        }
+        return instance;
+    }
+
 
     @Override
     public void saveUser(User user) throws FileNotFoundException {
